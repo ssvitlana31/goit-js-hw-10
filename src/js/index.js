@@ -15,7 +15,6 @@ errorEl.classList.add('is-hidden');
 function onChangeSelectEl() {
   const selectedCat = breedSelectEl.value;
   loaderTextEl.classList.remove('is-hidden');
-  breedSelectEl.disabled = true;
   catInfoEL.classList.add('is-hidden');
   fetchCatByBreed(selectedCat)
     .then(catInfo => {
@@ -28,7 +27,6 @@ function onChangeSelectEl() {
     })
     .finally(() => {
       loaderTextEl.classList.add('is-hidden');
-      breedSelectEl.disabled = false;
       catInfoEL.classList.remove('is-hidden');
     });
 }
