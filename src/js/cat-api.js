@@ -1,6 +1,6 @@
 const BASE_URL = 'https://api.thecatapi.com/v1';
-const END_POINT_1 = 'breeds';
-const END_POINT_2 = 'images/search';
+const END_POINT_1 = '/breeds';
+const END_POINT_2 = '/images/search';
 const options = {
   headers: {
     'x-api-key':
@@ -10,18 +10,20 @@ const options = {
 const param = 'breed_ids=${breedId}';
 
 export function fetchBreeds() {
-  return fetch('${BASE_URL}/${END_POINT_1}', options).then(res => {
+  const url = 'https://api.thecatapi.com/v1/breeds';
+  return fetch(url, options).then(res => {
     if (!res.ok) {
-      throw new Error('Oops! Something went wrong! Try reloading the page!');
+      throw new Error(res.status);
     }
     return res.json();
   });
 }
-
+// fetchBreeds().then(console.log);
 export function fetchCatByBreed(breedId) {
-  return fetch('${BASE_URL}/${END_POINT_2}?${param}', options).then(res => {
+  const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
+  return fetch(url, options).then(res => {
     if (!res.ok) {
-      throw new Error('Oops! Something went wrong! Try reloading the page!');
+      throw new Error(res.status);
     }
     return res.json();
   });
